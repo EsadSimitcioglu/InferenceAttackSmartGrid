@@ -78,8 +78,7 @@ def guess(epsilon, k, user_true_value_list, protocol_type, test_type, model=None
             for o, s in zip(obs_sequence.T[0], state_sequence):
                 true_value = user_true_value_list[index][index_counter]
                 guess_value = s if protocol_type == "OLH" else (s + 1)
-
-                if guess_value == 0 and true_value == 0:
+                if guess_value == true_value:
                     prob_sum += 1
                 index_counter += 1
             guess_prob_list.append(prob_sum / index_counter)
