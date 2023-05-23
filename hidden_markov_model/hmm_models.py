@@ -127,6 +127,19 @@ def getAdjacent(arr, number):
     return [x + 1 for x in v]
 
 
+def guess(model, user_perturbed_report):
+    obs_sequence_list = []
+    for perturbed_report in user_perturbed_report:
+        obs_sequence_list.append(perturbed_report)
+    obs_sequence = np.array([obs_sequence_list]).T
+
+    _, state_sequence = model.decode(obs_sequence)
+
+    for i in range(len(state_sequence)):
+        state_sequence[i] = state_sequence[i] + 1
+
+    return state_sequence
+
 def hmm_model_GRR(epsilon, k, train_type, user_value_list=None):
     p = np.exp(epsilon) / (np.exp(epsilon) + k - 1)
     q = (1 - p) / (k - 1)

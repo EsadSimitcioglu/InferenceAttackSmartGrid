@@ -41,9 +41,9 @@ def GRR_Client(input_data, k, epsilon):
         # GRR perturbation function
         rnd = np.random.random()
         if rnd <= p:
-            return input_data
+            return input_data - 1
         else:
-            return np.random.choice(domain[domain != input_data])
+            return np.random.choice(domain[domain != input_data] - 1)
 
     else:
         raise ValueError('k (int) and epsilon (float) need a numerical value.')
@@ -561,6 +561,7 @@ def OLH_Client2(input_data_list, k, epsilon, seed_init):
     report_list = list()
 
     for input_data in input_data_list:
+        input_data -= 1
         report_value = (xxhash.xxh32(str(input_data), seed=seed_init).intdigest() % g)
         rnd = np.random.random()
         if rnd > p:
