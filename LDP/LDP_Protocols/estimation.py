@@ -1,8 +1,8 @@
 import numpy as np
 
-from hidden_markov_model.hmm_models import hmm_model_GRR, hmm_model_RAPPOR, hmm_model_OUE, hmm_model_OLH, guess
-from LDP.protocols import GRR_Client, SIMPLE_RAPPOR_Client, OUE_Client, OLH_Client2
-from metric.metric import ratio_of_guess
+from LDP.hidden_markov_model.hmm_models import hmm_model_GRR, hmm_model_RAPPOR, hmm_model_OUE, hmm_model_OLH, guess
+from LDP.LDP_Protocols.protocols import GRR_Client, SIMPLE_RAPPOR_Client, OUE_Client, OLH_Client2
+from LDP.metric.metric import ratio_of_guess
 
 
 
@@ -156,9 +156,9 @@ def OLH_estimated_guess(user_values_list, k, epsilon):
     return experiment(epsilon, k, user_values_list, "OLH")
 
 
-def OLH_advance_estimated_guess(user_values_list, k, epsilon):
+def OLH_advance_estimated_guess(user_values_list, k, epsilon, test_count):
     return experiment(epsilon, k, user_values_list, "OLH", user_guess_value_list=user_values_list,
-                      test_count=3)
+                      test_count=test_count)
 
 
 def OLH_FK_estimated_guess(user_values_list, k, epsilon):
